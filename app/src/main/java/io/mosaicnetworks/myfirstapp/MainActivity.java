@@ -12,6 +12,8 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String TAG = "FIRST-BABBLE-APP";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

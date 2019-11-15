@@ -54,13 +54,13 @@ public final class BabbleState implements TxConsumer {
     }
 
     private static byte[] hash(String tx) {
-            return mSha256Digest.digest(tx.getBytes(Charset.forName("UTF-8")));
+        return mSha256Digest.digest(tx.getBytes(Charset.forName("UTF-8")));
     }
 
     private static byte[] hashFromTwoHashes(byte[] a, byte[] b) {
-            byte[] tempHash = new byte[a.length + b.length];
-            System.arraycopy(a, 0, tempHash, 0, a.length);
-            System.arraycopy(b, 0, tempHash, 0, b.length);
-            return mSha256Digest.digest(tempHash);
+        byte[] tempHash = new byte[a.length + b.length];
+        System.arraycopy(a, 0, tempHash, 0, a.length);
+        System.arraycopy(b, 0, tempHash, 0, b.length);
+        return mSha256Digest.digest(tempHash);
     }
 }

@@ -8,4 +8,6 @@
     <string name="no_moniker_alert_title">No moniker</string>
     <string name="no_moniker_alert_message">Please enter a moniker!</string>
     <string name="ok_button">OK</string>
+    <string name="babble_busy_title">Babble node busy</string>
+    <string name="babble_busy_message">Please try again in a few seconds!</string>
 </resources>

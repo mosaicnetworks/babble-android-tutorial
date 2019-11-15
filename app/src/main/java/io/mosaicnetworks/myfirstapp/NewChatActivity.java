@@ -18,8 +18,6 @@ import io.mosaicnetworks.babble.discovery.Peer;
 
 public class NewChatActivity extends AppCompatActivity {
 
-    private MessagingService mMessagingService = MessagingService.getInstance();
-    private String mMoniker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,24 +30,26 @@ public class NewChatActivity extends AppCompatActivity {
     public void startChat(View view) {
         //get moniker
         EditText editText = findViewById(R.id.editText);
-        mMoniker = editText.getText().toString();
-        if (mMoniker.isEmpty()) {
+        String moniker = editText.getText().toString();
+        if (moniker.isEmpty()) {
             displayOkAlertDialog(R.string.no_moniker_alert_title, R.string.no_moniker_alert_message);
             return;
         }
 
-        joinChat();
-    }
+        MessagingService messagingService = MessagingService.getInstance();
+        try {
+            messagingService.configure(new ArrayList<Peer>(), moniker, Utils.getIPAddr(this));
+        } catch (IllegalStateException ex) {
+            //we tried to reconfigure before a leave completed
+            displayOkAlertDialog(R.string.babble_busy_title, R.string.babble_busy_message);
+            return;
+        }
 
-
-    private void joinChat() {
-        mMessagingService.configure(new ArrayList<Peer>(), mMoniker, Utils.getIPAddr(this));
-        mMessagingService.start();
+        messagingService.start();
         Intent intent = new Intent(this, ChatActivity.class);
-        intent.putExtra("MONIKER", mMoniker);
+        intent.putExtra("MONIKER", moniker);
         startActivity(intent);
     }
-
 
     private void displayOkAlertDialog(@StringRes int titleId, @StringRes int messageId) {
         AlertDialog alertDialog = new AlertDialog.Builder(this)
