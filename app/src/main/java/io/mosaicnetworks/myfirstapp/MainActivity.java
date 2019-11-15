@@ -2,11 +2,13 @@ package io.mosaicnetworks.myfirstapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import io.mosaicnetworks.babble.node.KeyPair;
 
 import android.util.Log;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,4 +20,13 @@ public class MainActivity extends AppCompatActivity {
         KeyPair kp = new KeyPair();
         Log.i("Yippee",kp.privateKey);
     }
+
+    // called when the user presses the new chat button
+    public void newChat(View view) {
+        Log.i("Ki","newChat Called");
+        Intent intent = new Intent(this, NewChatActivity.class);
+        startActivity(intent);
+    }
+
+
 }

@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">First Babble Android App</string>
+    <string name="new_chat">New</string>
+    <string name="title_activity_new_chat">New Chat</string>
+    <string name="title_activity_chat">ChatActivity</string>
+    <string name="moniker">Moniker</string>
+    <string name="start">Start</string>
+    <string name="no_moniker_alert_title">No moniker</string>
+    <string name="no_moniker_alert_message">Please enter a moniker!</string>
+    <string name="ok_button">OK</string>
 </resources>
