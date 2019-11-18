@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
+    tools:context=".JoinChatActivity">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -22,18 +21,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="newChat"
-        android:text="@string/new_chat" />
+        <EditText
+            android:id="@+id/editMoniker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/moniker"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/editHost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/host"
+            android:inputType="textUri" />
+
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/buttonJoin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="joinChat"
             android:text="@string/join" />
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

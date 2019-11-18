@@ -30,5 +30,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // called when the user presses the join chat button
+    public void joinChat(View view) {
+        Intent intent = new Intent(this, JoinChatActivity.class);
+        startActivity(intent);
+    }
 
 }
