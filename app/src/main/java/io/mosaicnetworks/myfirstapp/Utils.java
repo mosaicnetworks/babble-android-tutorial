@@ -12,7 +12,7 @@ public class Utils {
     public static String getIPAddr(Context context) {
         WifiManager wm = (WifiManager) context.getApplicationContext().getSystemService(WIFI_SERVICE);
         String ip = Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress());
-        Log.d("getIPAddr", "Got IP address: " + ip);
+        Log.d(MainActivity.TAG, "Got IP address: " + ip);
         return ip;
     }
 }
