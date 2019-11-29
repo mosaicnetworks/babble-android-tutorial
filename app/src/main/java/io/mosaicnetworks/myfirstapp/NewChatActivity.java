@@ -2,29 +2,23 @@ package io.mosaicnetworks.myfirstapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-
 import android.view.View;
 import android.widget.EditText;
 
 import java.util.ArrayList;
-
 import io.mosaicnetworks.babble.discovery.Peer;
 
-public class NewChatActivity extends AppCompatActivity {
 
+public class NewChatActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_chat);
     }
-
 
     // called when the user presses the start chat button
     public void startChat(View view) {
@@ -38,7 +32,7 @@ public class NewChatActivity extends AppCompatActivity {
 
         MessagingService messagingService = MessagingService.getInstance();
         try {
-            messagingService.configure(new ArrayList<Peer>(), moniker, Utils.getIPAddr(this));
+            messagingService.configureNew(moniker, Utils.getIPAddr(this));
         } catch (IllegalStateException ex) {
             //we tried to reconfigure before a leave completed
             displayOkAlertDialog(R.string.babble_busy_title, R.string.babble_busy_message);
@@ -59,6 +53,4 @@ public class NewChatActivity extends AppCompatActivity {
                 .create();
         alertDialog.show();
     }
-
-
 }

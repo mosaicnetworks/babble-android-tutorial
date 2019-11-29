@@ -7,13 +7,13 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import io.mosaicnetworks.babble.node.TxConsumer;
+import io.mosaicnetworks.babble.node.BabbleState;
 
-public final class BabbleState implements TxConsumer {
+public class AppState implements BabbleState {
 
+    private Message mLatestMessage;
     private static final MessageDigest mSha256Digest;
-    private StateObserver mObserver;
-    private byte[] mStateHash = "geneseis-state".getBytes();
+    private byte[] mStateHash = "genesis-state".getBytes();
 
     static {
         try {
@@ -25,12 +25,8 @@ public final class BabbleState implements TxConsumer {
         }
     }
 
-    public BabbleState(StateObserver observer) {
-        mObserver = observer;
-    }
-
     @Override
-    public byte[] onReceiveTransactions(byte[][] transactions) {
+    public byte[] applyTransactions(byte[][] transactions) {
         for (byte[] rawTx:transactions) {
             String tx = new String(rawTx, StandardCharsets.UTF_8);
 
@@ -42,13 +38,29 @@ public final class BabbleState implements TxConsumer {
                 continue;
             }
 
-            mObserver.onStateChanged(Message.fromBabbleTx(babbleTx));
-            updateStateHash(tx);
+            onMessageReceived(Message.fromBabbleTx(babbleTx));
+
         }
 
-        return mStateHash;
+        return new byte[0];
     }
 
+    @Override
+    public void reset() {
+        //do nothing
+    }
+
+    private void onMessageReceived(Message message) {
+
+        mLatestMessage = message;
+    }
+
+    public Message getLatestMessage() {
+        //TODO: this can return null if no messages are successfully parsed
+        return mLatestMessage;
+    }
+
+    //TODO: use state hash
     private void updateStateHash(String tx) {
         mStateHash = hashFromTwoHashes(mStateHash, hash(tx));
     }
