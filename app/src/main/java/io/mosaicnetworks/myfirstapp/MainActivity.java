@@ -23,8 +23,10 @@ public class MainActivity extends BaseConfigActivity {
 
     @Override
     public void onJoined(String moniker) {
-//DO NOTHING
-     }
+        Intent intent = new Intent(this, ChatActivity.class);
+        intent.putExtra("MONIKER", moniker);
+        startActivity(intent);
+    }
 
     @Override
     public void onStartedNew(String moniker) {
